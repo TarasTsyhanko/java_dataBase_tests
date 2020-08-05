@@ -1,0 +1,14 @@
+#Configuration:
+#packeges: "arraystasks"
+# name: annotationandreflaction.Main
+Appenders:
+  Console:
+    PatternLayout:
+      pattern: "[%-5level]  %class{1}:%L - %msg %xEx{short}%n"
+    name: Console
+    target: SYSTEM_OUT
+Loggers:
+  Root:
+    level: trace
+    AppenderRef:
+      - ref: Console

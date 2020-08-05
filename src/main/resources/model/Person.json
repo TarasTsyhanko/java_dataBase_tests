@@ -1,0 +1,37 @@
+[
+  {
+    "firstName": "Zbishec",
+    "lastName": "Bunka",
+    "nationality": "Polish",
+    "country": "Poland",
+    "email": "zbishec@gmail.com"
+  },
+  {
+    "firstName": "Ger",
+    "lastName": "Bravuy",
+    "nationality": "Belarus",
+    "country": "Belarus",
+    "email": "whireman@gmail.com"
+  },
+  {
+    "firstName": "Ank",
+    "lastName": "Fagu",
+    "nationality": "Turkish",
+    "country": "Turkey",
+    "email": "dacha@gmail.com"
+  },
+  {
+    "firstName": "Voicek",
+    "lastName": "WriteProgram",
+    "nationality": "Polish",
+    "country": "Poland",
+    "email": "travelMan@gmail.com"
+  },
+  {
+    "firstName": "Ihor",
+    "lastName": "Velikuy",
+    "nationality": "Ukrainien",
+    "country": "Ukraine",
+    "email": "programer@gmail.com"
+  }
+]

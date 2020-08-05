@@ -1,0 +1,14 @@
+<suite name="TestSuit">
+    <test name="DataBaseTests">
+        <classes>
+            <class name="babksystemtests.BankTest"/>
+            <class name="babksystemtests.LocationTest"/>
+            <class name="babksystemtests.LoanTest"/>
+            <class name="babksystemtests.DepositTest"/>
+            <class name="babksystemtests.InvestmentTest"/>
+            <class name="babksystemtests.PersonTest"/>
+        </classes>
+    </test>
+</suite>
+
+

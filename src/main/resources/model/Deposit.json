@@ -1,0 +1,37 @@
+[
+  {
+    "amount": "30000",
+    "percent": "12.4",
+    "currency": "USD",
+    "dateIssue": "2019-12-31",
+    "dateReturn": "2023-05-04"
+  },
+  {
+    "amount": "100001",
+    "percent": "17.4",
+    "currency": "UAN",
+    "dateIssue": "2019-10-31",
+    "dateReturn": "2029-12-04"
+  },
+  {
+    "amount": "120000",
+    "percent": "8.4",
+    "currency": "EUR",
+    "dateIssue": "2010-03-01",
+    "dateReturn": "2024-09-04"
+  },
+  {
+    "amount": "120000",
+    "percent": "13.9",
+    "currency": "UAN",
+    "dateIssue": "2017-02-20",
+    "dateReturn": "2021-08-31"
+  },
+  {
+    "amount": "56000",
+    "percent": "5.4",
+    "currency": "USD",
+    "dateIssue": "2018-12-21",
+    "dateReturn": "2025-01-14"
+  }
+]
