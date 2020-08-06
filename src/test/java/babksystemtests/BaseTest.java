@@ -87,5 +87,7 @@ public abstract class BaseTest {
                 log.error( e.getMessage());
             }
         });
+        String s = System.getProperty("example");
+        log.info(s);
     }
 }

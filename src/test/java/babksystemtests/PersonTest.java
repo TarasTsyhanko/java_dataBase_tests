@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@Test
+@Test(priority = 6)
 public class PersonTest extends BaseTest {
     Person newPerson = new Person("Joye", "Tribiany", "american", "UAS", "howYouDoing@gmail.com");
 

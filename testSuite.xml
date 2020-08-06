@@ -1,6 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestSuit">
-    <test name="DataBaseTests">
+    <test name="DataBaseTests" parallel="false" preserve-order="true">
         <classes>
+            <class name="babksystemtests.BaseTest"/>
             <class name="babksystemtests.BankTest"/>
             <class name="babksystemtests.LocationTest"/>
             <class name="babksystemtests.LoanTest"/>
