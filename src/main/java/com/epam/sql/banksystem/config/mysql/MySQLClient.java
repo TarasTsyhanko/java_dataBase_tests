@@ -10,8 +10,6 @@ import java.sql.SQLException;
 
 public class MySQLClient {
     private static Logger log = LogManager.getLogger(MySQLClient.class);
-    private static final String URL = "jdbc:mysql://localhost:3306/db_jdbc?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false";
-
     private static DataProp props = new DataProp();
     private static Connection connection;
 
@@ -22,7 +20,7 @@ public class MySQLClient {
             synchronized (MySQLClient.class) {
                 try {
                     Class.forName(props.jdbcDriver());
-                    log.debug("Try connect to \'" + props.dbName()
+                    log.debug("Try connect to \'" + props.dbName()+"with address "+props.dbHost()
                             + "\' with user: \'" + props.dbUser() + "\' and password: \'" + props.dbPass() + "\' ...");
                     connection = DriverManager.getConnection(props.sqlURL(), props.dbUser(), props.dbPass());
                     log.debug("Connected to \'" + props.dbName() + "\' database successfully!");

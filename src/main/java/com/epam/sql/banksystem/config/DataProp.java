@@ -16,7 +16,7 @@ public class DataProp {
         }
     }
 
-    private String dbHost() {
+    public String dbHost() {
         return props.getProperty(DB_HOST);
     }
 
