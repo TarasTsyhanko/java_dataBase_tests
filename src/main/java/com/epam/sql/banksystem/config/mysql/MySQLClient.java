@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class MySQLClient {
     private static Logger log = LogManager.getLogger(MySQLClient.class);
+    private static final String URL = "jdbc:mysql://localhost:3306/db_jdbc?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static DataProp props = new DataProp();
     private static Connection connection;
