@@ -24,10 +24,10 @@ def suite2 = project.hasProperty("suite2")
 test {
     useTestNG() {
         if (suite1) {
-            suites "testSuit.xml"
+            suites "testSuite.xml"
         }
         if (suite2) {
-            suites "simpleSuit.xml"
+            suites "simpleSuite.xml"
         }
         systemProperty "example", System.getProperty("example")
     }
