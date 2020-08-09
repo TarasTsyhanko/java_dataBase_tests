@@ -7,7 +7,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentManager {
     private static ExtentReports extent;
-    private static String reportFileName = "Test-Automaton-Report"+".html";
+    private static String reportFileName = "extentreporter/Test-Automaton-Report"+".html";
 
 
 
