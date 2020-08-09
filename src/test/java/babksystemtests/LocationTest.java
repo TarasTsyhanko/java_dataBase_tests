@@ -12,21 +12,22 @@ public class LocationTest extends BaseTest {
     private Location newLocation = new Location("England", "York", "Sheekspeer 3");
     private Location exampleLocation = new Location("Franche", "Lion", "Sheekspeer 3");
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "add all location from file to DB")
     public void insertAllLocationTestCase() {
         locationList.forEach(location -> locationService.insertLocation(location));
         Assert.assertEquals(locationList, locationService.getAllLocation());
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "insert new location to DB")
     public void insertLocationTestCase(){
         locationService.insertLocation(newLocation);
         Location locDB = locationService.getLocation(newLocation);
-        Assert.assertEquals(newLocation, locDB);
         newLocation.setLocationID(locDB.getLocationID());
+        Assert.assertEquals(newLocation, locDB);
+
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2,description = "add already exist location to DB")
     public void insertSameLocation(){
         locationService.insertLocation(newLocation);
         List<Location> locations = locationService.getAllLocation()
@@ -35,7 +36,7 @@ public class LocationTest extends BaseTest {
         Assert.assertEquals(locations.size(),1);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4,description = "update location in adb")
     public void updateLocation(){
         newLocation.setCity("London");
         newLocation.setStreet("Baker Street 221B");
@@ -43,7 +44,7 @@ public class LocationTest extends BaseTest {
         Assert.assertEquals(exampleLocation, locationService.getLocation(newLocation));
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5,description = "delete location from DB")
     public void deleteLocation(){
         locationService.deleteLocation(newLocation);
         Location location = locationService.getLocation(newLocation);

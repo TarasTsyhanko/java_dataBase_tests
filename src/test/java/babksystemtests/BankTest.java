@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Test(priority = 2)
 public class BankTest extends BaseTest {
-    @Test(priority = 1)
+    @Test(priority = 1,description ="add all Bank from file to DB")
     public void insertAllBankTestCase() {
         List<Location> locDB = locationService.getAllLocation();
         bankList.get(0).setIDLocation(locDB.get(0).getLocationID());
@@ -21,14 +21,14 @@ public class BankTest extends BaseTest {
         Assert.assertEquals(bankList, bankService.getAllBanks());
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "get all banks from DB")
     public void getBankByNameTestCase(){
         Bank bank = bankList.get(0);
         Bank bankDB = bankService.getBankByName(bank.getName());
         Assert.assertEquals(bankDB.getName(), bank);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "add already added bank to DB")
     public void insertSameBank(){
         Bank newBank = bankList.get(1);
         bankService.insertBank(newBank);
@@ -38,14 +38,14 @@ public class BankTest extends BaseTest {
         Assert.assertEquals(banks.size(),1);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "get bank by location id from DB")
     public void getBankByLocationTestCase(){
         Location location = locationList.get(1);
         Bank bank = bankService.getBankByLocation(location);
         Assert.assertEquals(location.getLocationID(), bank.getIDLocation());
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, description = "add bank with same location to DB")
     public void insertBankWithSameLocationTestCase() {
         Location location = locationService.getAllLocation().get(0);
         Bank bank = new Bank("New Bank", location.getLocationID());
@@ -56,7 +56,7 @@ public class BankTest extends BaseTest {
         Assert.assertEquals(banks.size(),1);
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, description = "update bank name in DB")
     public void updateNameBankTestCase(){
         Bank bank = bankService.getAllBanks().get(1);
         bank.setName("Private Bank");
@@ -64,7 +64,7 @@ public class BankTest extends BaseTest {
         Assert.assertEquals(bank, bankService.getBankByName(bank.getName()));
     }
 
-    @Test(priority = 7)
+    @Test(priority = 7, description = "change bank location in DB")
     public void updateLocationBankTestCase(){
         Bank bank = bankService.getAllBanks().get(1);
         bank.setIDLocation(locationService.getAllLocation().get(4).getLocationID());
@@ -72,7 +72,7 @@ public class BankTest extends BaseTest {
         Assert.assertEquals(bank, bankService.getBankByName(bank.getName()));
     }
 
-    @Test(priority = 8)
+    @Test(priority = 8, description = "delete bank from DB")
     public void deleteBankTestCase(){
         Bank bank = bankService.getAllBanks().get(2);
         bankService.deleteBank(bank);

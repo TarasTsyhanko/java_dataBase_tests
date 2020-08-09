@@ -1,8 +1,6 @@
 package com.epam.sql.banksystem.listeners;
 
 import com.aventstack.extentreports.Status;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -12,7 +10,6 @@ import java.util.Arrays;
 import static com.epam.sql.banksystem.listeners.ExtentTestManager.*;
 
 public class TestListener implements ITestListener {
-    private static final Logger log = LogManager.getLogger(TestListener.class);
 
     @Override
     public void onStart(ITestContext context) {
@@ -26,6 +23,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         startTest(result.getMethod().getMethodName());
+        test.getModel().setDescription("Test description: "+result.getMethod().getDescription());
     }
 
     @Override

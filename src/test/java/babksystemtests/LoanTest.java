@@ -26,15 +26,16 @@ public class LoanTest extends BaseTest {
         banksDB = bankService.getAllBanks();
     }
 
-    @Test(priority = 4)
-    public void insertLoanIntoAnotherBankTestCase(){
+    @Test(priority = 1,description = "add loan into bank in DB ")
+    public void insertLoanIntoBankTestCase(){
         Loan newLoan = loanList.get(2);
         newLoan.setIDBank(banksDB.get(1).getId());
         newLoan.setIDClient(personsDB.get(0).getId());
         loanService.insertLoan(newLoan);
+        Assert.assertEquals(loanService.getAllLoanIByClient(personsDB.get(0).getId()),newLoan);
     }
 
-    @Test(priority = 5)
+    @Test(priority = 2, description = "get all loan from DB")
     public void getAllLoanByBankTestCase(){
         Bank bank = banksDB.get(2);
         Loan loan1 = loanList.get(1);
@@ -51,21 +52,21 @@ public class LoanTest extends BaseTest {
         Assert.assertEquals(list.get(0).getIDBank(), list.get(1).getIDBank());
     }
 
-    @Test(priority = 6)
+    @Test(priority = 3,description = "get all loan in one client from DB")
     public void getAllLoanByClientTestCase() {
         List<Loan> list = loanService.getAllLoanIByClient(personsDB.get(0).getId());
         Assert.assertEquals(2, list.size());
         Assert.assertNotEquals(list.get(0).getIDBank(), list.get(1).getIDBank());
     }
 
-    @Test(priority = 6)
+    @Test(priority = 4,description = "get loan in client who has no loan, from DB")
     public void getLoanByClientIfClientHasNoLoanTestCase() {
         List<Loan> list = loanService.getAllLoanIByClient(personsDB.get(personsDB.size() - 1).getId());
         Assert.assertEquals(list.size(),0);
 
     }
 
-    @Test(priority = 7)
+    @Test(priority = 5, description = "update Loan in DB")
     public void updateLoanTestCase(){
         Loan loan = loanService.getAllLoan().get(0);
         loan.setAmount(23000);
@@ -74,7 +75,7 @@ public class LoanTest extends BaseTest {
         Assert.assertEquals(loan, upLoan);
     }
 
-    @Test(priority = 7)
+    @Test(priority = 6, description = "delete loan from DB")
     public void deleteLoanTestCase() {
         Loan loan = loanService.getAllLoan().get(2);
         loanService.deleteLoan(loan);
