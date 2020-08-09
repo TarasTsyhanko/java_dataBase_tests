@@ -23,13 +23,6 @@ public class CrudOperationConstants {
     public static final String UPDATE_LOCATION = "UPDATE Location SET Country=?, City=?, Street=? WHERE IDLocation=?";
     public static final String DELETE_LOCATION = "DELETE FROM Location WHERE IDLocation=?";
 
-    public static final String SELECT_ALL_DEPOSIT = "SELECT * FROM Deposit";
-    public static final String SELECT_ALL_DEPOSIT_BY_CLIENT = "SELECT distinct IDDeposit,d.IDBank,IDClient,Amount,Percent,Currency,Date_Issue,Date_Return FROM Deposit d JOIN Person p, Bank b WHERE p.IDPerson=d.IDClient AND p.IDPerson=? OR b.IDBank=d.IDClient AND b.IDBank=?";
-    public static final String SELECT_ALL_DEPOSIT_IN_ONE_BANK = "SELECT IDDeposit,d.IDBank,IDClient,Amount,Percent,Currency,Date_Issue,Date_Return FROM Deposit d JOIN Bank b WHERE b.IDBank=d.IDBank AND b.BankName=?";
-    public static final String SELECT_DEPOSIT_BY_ID="SELECT * FROM Deposit WHERE IDDeposit=?";
-    public static final String INSERT_DEPOSIT= "INSERT INTO Deposit (IDDeposit,IDBank,IDClient,Amount,Percent,Currency,Date_Issue,Date_Return) VALUE(?,?,?,?,?,?,?,?)";
-    public static final String UPDATE_DEPOSIT= "UPDATE Deposit SET Amount=?,Percent=?,Currency=?,Date_Issue=?,Date_Return=? WHERE IDDeposit=?";
-    public static final String DELETE_DEPOSIT= "DELETE FROM Deposit WHERE IDDeposit=?";
 
     public static final String SELECT_ALL_LOAN = "SELECT * FROM Loan";
     public static final String SELECT_ALL_LOAN_BY_CLIENT = "SELECT distinct IDLoan,d.IDBank,IDClient,Amount,Percent,Currency,Date_Issue,Date_Return FROM Loan d JOIN Person p, Bank b WHERE p.IDPerson=d.IDClient AND p.IDPerson=? OR b.IDBank=d.IDClient AND b.IDBank=?";
@@ -39,13 +32,6 @@ public class CrudOperationConstants {
     public static final String UPDATE_LOAN= "UPDATE Loan SET Amount=?,Percent=?,Currency=?,Date_Issue=?,Date_Return=? WHERE IDLoan=?";
     public static final String DELETE_LOAN= "DELETE FROM Loan WHERE IDLoan=?";
 
-    public static final String SELECT_ALL_INVESTMENT = "SELECT * FROM Investment";
-    public static final String SELECT_ALL_INVESTMENT_BY_CLIENT = "SELECT distinct IDInvestment,d.IDBank,IDClient,Amount,Percent,Currency,Date_Issue,Date_Return FROM Investment d JOIN Person p, Bank b WHERE p.IDPerson=d.IDClient AND p.IDPerson=? OR b.IDBank=d.IDClient AND b.IDBank=?";
-    public static final String SELECT_ALL_INVESTMENT_IN_ONE_BANK = "SELECT IDInvestment,d.IDBank,IDClient,Amount,Percent,Currency,Date_Issue,Date_Return FROM Investment d JOIN Bank b WHERE b.IDBank=d.IDBank AND b.BankName=?";
-    public static final String SELECT_INVESTMENT_BY_ID="SELECT * FROM Investment WHERE IDInvestment=?";
-    public static final String INSERT_INVESTMENT= "INSERT INTO Investment (IDInvestment,IDBank,IDClient,Amount,Percent,Currency,Date_Issue,Date_Return) VALUE(?,?,?,?,?,?,?,?)";
-    public static final String UPDATE_INVESTMENT= "UPDATE Investment SET Amount=?,Percent=?,Currency=?,Date_Issue=?,Date_Return=? WHERE IDInvestment=?";
-    public static final String DELETE_INVESTMENT= "DELETE FROM Investment WHERE IDInvestment=?";
 
     public static final String SET_FOREIGN_KEY_CHECKS = "SET FOREIGN_KEY_CHECKS =";
 

@@ -15,17 +15,18 @@ public class MySQLClient {
 
     private MySQLClient() {
     }
+
     public static Connection getConnection() {
         if (connection == null) {
             synchronized (MySQLClient.class) {
                 try {
                     Class.forName(props.jdbcDriver());
-                    log.debug("Try connect to \'" + props.dbName()+"with address "+props.dbHost()
-                            + "\' with user: \'" + props.dbUser() + "\' and password: \'" + props.dbPass() + "\' ...");
+                    // log.debug("Try connect to \'" + props.dbName()+"with address "+props.dbHost()
+                    //         + "\' with user: \'" + props.dbUser() + "\' and password: \'" + props.dbPass() + "\' ...");
                     connection = DriverManager.getConnection(props.sqlURL(), props.dbUser(), props.dbPass());
-                    log.debug("Connected to \'" + props.dbName() + "\' database successfully!");
+                    // log.debug("Connected to \'" + props.dbName() + "\' database successfully!");
                 } catch (ClassNotFoundException e) {
-                    log.error("Class \'" + props.jdbcDriver() + "\' not found!");
+                    log.error("Class " + props.jdbcDriver() + " not found!");
                     e.printStackTrace();
                 } catch (SQLException e) {
                     log.error("SQLException: " + e.getMessage());
@@ -42,7 +43,7 @@ public class MySQLClient {
             try {
                 connection.close();
                 connection = null;
-                log.debug("DB connection was closed successfully!");
+                //log.debug("DB connection was closed successfully!");
             } catch (SQLException e) {
                 log.error("Database access error occurs! Cannot close Connection!!!");
             }

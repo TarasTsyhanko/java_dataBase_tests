@@ -43,15 +43,6 @@ public class ParserJSon {
         return Arrays.asList(locations);
     }
 
-    public  List<Deposit> getDeposits() {
-        Deposit[] deposits = new Deposit[0];
-        try { deposits = objectMapper.readValue(FileReaders.openFile(DEPOSIT_JSON_FILE), Deposit[].class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Arrays.asList(deposits);
-    }
-
     public  List<Loan> getLoans() {
         Loan[] loans = new Loan[0];
         try { loans = objectMapper.readValue(FileReaders.openFile(LOAN_JSON_FILE), Loan[].class);
@@ -59,14 +50,5 @@ public class ParserJSon {
             e.printStackTrace();
         }
         return Arrays.asList(loans);
-    }
-
-    public  List<Investment> getInvestments() {
-        Investment[] in = new Investment[0];
-        try { in = objectMapper.readValue(FileReaders.openFile(INVESTMENT_JSON_FILE), Investment[].class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Arrays.asList(in);
     }
 }

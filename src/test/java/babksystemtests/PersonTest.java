@@ -1,51 +1,51 @@
 package babksystemtests;
 
-import com.epam.sql.banksystem.config.exception.InfoException;
 import com.epam.sql.banksystem.entity.Person;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Test(priority = 6)
+@Test(priority = 3)
 public class PersonTest extends BaseTest {
     Person newPerson = new Person("Joye", "Tribiany", "american", "UAS", "howYouDoing@gmail.com");
 
 
     @Test(priority = 1)
-    public void getAllPersonTestCase() throws InfoException {
-        List<Person> personListDB = personService.getAllPerson();
-        Assert.assertEquals(personListDB, personsDB);
+    public void insertAllPersonTestCase(){
+        personList.forEach(person -> personService.insertPerson(person));
+        Assert.assertEquals(personList, personService.getAllPerson());
     }
 
     @Test(priority = 2)
-    public void insertPersonTestCase() throws InfoException {
+    public void insertPersonTestCase(){
         Person personDB = personService.insertPerson(newPerson);
         Assert.assertEquals(personDB, newPerson);
     }
 
-    @Test(priority = 3,
-            expectedExceptions = {InfoException.class},
-            expectedExceptionsMessageRegExp = "This person already exists")
-    public void insertSamePersonTestCase() throws InfoException {
-        Person personDB = personService.insertPerson(newPerson);
+    @Test(priority = 3)
+    public void insertSamePersonTestCase(){
+        personService.insertPerson(newPerson);
+        List<Person> people = personService.getAllPerson()
+                .stream().filter(person -> person.equals(newPerson))
+                .collect(Collectors.toList());
+        Assert.assertEquals(people.size(),1);
     }
 
     @Test(priority = 4)
-    public void getPersonByNameTestCase() throws InfoException {
+    public void getPersonByNameTestCase(){
         Person personDB = personService.getPersonByName(newPerson.getFirstName(),newPerson.getLastName());
         Assert.assertEquals(newPerson,personDB);
     }
 
-    @Test(priority = 4,
-    expectedExceptions = {InfoException.class},
-    expectedExceptionsMessageRegExp = "This person is absent")
-    public void getNotExistsPersonByNameTestCase() throws InfoException {
-        Person personDB = personService.getPersonByName("Oleh","Vylnuy");
+    @Test(priority = 4)
+    public void getNotExistsPersonByNameTestCase(){
+        Assert.assertNull(personService.getPersonByName("Oleh","Vylnuy"));
     }
 
     @Test(priority = 5)
-    public void updatePersonTestCase() throws InfoException {
+    public void updatePersonTestCase(){
         Person upPerson = personService.getAllPerson().get(2);
         upPerson.setLastName("Wise");
         upPerson.setCountry("Australia");
@@ -53,13 +53,11 @@ public class PersonTest extends BaseTest {
         Assert.assertEquals(personDB, upPerson);
     }
 
-    @Test(priority = 6,
-            expectedExceptions = {InfoException.class},
-            expectedExceptionsMessageRegExp = "This person is absent")
-    public void deletePersonTestCase() throws InfoException {
+    @Test(priority = 6)
+    public void deletePersonTestCase(){
         Person person = personService.getAllPerson().get(3);
        personService.deletePerson(person);
-       Person personDB = personService.getPersonByName(person.getFirstName(),person.getLastName());
+       Assert.assertNull(personService.getPersonByName(person.getFirstName(),person.getLastName()));
     }
 
 
