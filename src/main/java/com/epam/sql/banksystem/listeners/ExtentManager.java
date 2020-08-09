@@ -9,15 +9,12 @@ public class ExtentManager {
     private static ExtentReports extent;
     private static String reportFileName = "extentreporter/Test-Automaton-Report"+".html";
 
-
-
     public static ExtentReports getInstance() {
         if (extent == null)
             createInstance();
         return extent;
     }
 
-    //Create an extent report instance
     public static ExtentReports createInstance() {
         String fileName = reportFileName;
 
@@ -27,14 +24,10 @@ public class ExtentManager {
         htmlReporter.config().setTheme(Theme.STANDARD);
         htmlReporter.config().setDocumentTitle(reportFileName);
         htmlReporter.config().setEncoding("Cp1251");
-       // htmlReporter.config().setReportName(reportFileName);
-
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        //Set environment details
         extent.setSystemInfo("OS", "Windows");
         extent.setSystemInfo("AUT", "QA");
-
         return extent;
     }
 }

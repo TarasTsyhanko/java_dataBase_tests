@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 @Test(priority = 1)
 public class LocationTest extends BaseTest {
     private Location newLocation = new Location("England", "York", "Sheekspeer 3");
+    private Location exampleLocation = new Location("Franche", "Lion", "Sheekspeer 3");
 
     @Test(priority = 1)
     public void insertAllLocationTestCase() {
@@ -39,7 +40,7 @@ public class LocationTest extends BaseTest {
         newLocation.setCity("London");
         newLocation.setStreet("Baker Street 221B");
         locationService.updateLocation(newLocation);
-        Assert.assertEquals(newLocation, locationService.getLocation(newLocation));
+        Assert.assertEquals(exampleLocation, locationService.getLocation(newLocation));
     }
 
     @Test(priority = 5)
