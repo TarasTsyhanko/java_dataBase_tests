@@ -1,97 +1,82 @@
 package babksystemtests;
 
-import com.epam.sql.banksystem.config.exception.InfoException;
 import com.epam.sql.banksystem.entity.Bank;
 import com.epam.sql.banksystem.entity.Location;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-@Test(priority = 1)
+import java.util.stream.Collectors;
+
+@Test(priority = 2)
 public class BankTest extends BaseTest {
-    @Test(priority = 1)
+    @Test(priority = 1,description ="add all Bank from file to DB")
     public void insertAllBankTestCase() {
         List<Location> locDB = locationService.getAllLocation();
         bankList.get(0).setIDLocation(locDB.get(0).getLocationID());
         bankList.get(1).setIDLocation(locDB.get(1).getLocationID());
         bankList.get(2).setIDLocation(locDB.get(2).getLocationID());
         bankList.get(3).setIDLocation(locDB.get(3).getLocationID());
-        bankList.forEach(bank -> {
-            try {
-                bankService.insertBank(bank);
-            } catch (InfoException e) {
-                e.printStackTrace();
-            }
-        });
-        Assert.assertEquals(bankList.size(), bankService.getAllBanks().size());
+        bankList.forEach(bank -> bankService.insertBank(bank));
+        Assert.assertEquals(bankList, bankService.getAllBanks());
     }
 
-    @Test(priority = 2)
-    public void getAllBankTestCase() {
-        List<Bank> listDB = bankService.getAllBanks();
-        Assert.assertEquals(bankList, listDB);
-    }
-
-    @Test(priority = 3)
-    public void getBankByNameTestCase() throws InfoException {
+    @Test(priority = 3, description = "get all banks from DB")
+    public void getBankByNameTestCase(){
         Bank bank = bankList.get(0);
         Bank bankDB = bankService.getBankByName(bank.getName());
-        Assert.assertEquals(bank, bankDB);
+        Assert.assertEquals(bankDB.getName(), bank);
     }
 
-    @Test(priority = 3,
-            expectedExceptions = {InfoException.class},
-            expectedExceptionsMessageRegExp = "This bank already exists")
-    public void insertSameBank() throws InfoException {
-        bankService.insertBank(bankList.get(1));
+    @Test(priority = 3, description = "add already added bank to DB")
+    public void insertSameBank(){
+        Bank newBank = bankList.get(1);
+        bankService.insertBank(newBank);
+        List<Bank> banks = bankService.getAllBanks()
+                .stream().filter(bank -> bank.equals(newBank))
+                .collect(Collectors.toList());
+        Assert.assertEquals(banks.size(),1);
     }
 
-    @Test(priority = 4)
-    public void getBankByLocationTestCase() throws InfoException {
+    @Test(priority = 4, description = "get bank by location id from DB")
+    public void getBankByLocationTestCase(){
         Location location = locationList.get(1);
         Bank bank = bankService.getBankByLocation(location);
         Assert.assertEquals(location.getLocationID(), bank.getIDLocation());
     }
 
-    @Test(priority = 5,
-            expectedExceptions = {InfoException.class},
-            expectedExceptionsMessageRegExp = "This Location already has Bank")
-    public void insertBankWithSameLocationTestCase() throws InfoException {
+    @Test(priority = 5, description = "add bank with same location to DB")
+    public void insertBankWithSameLocationTestCase() {
         Location location = locationService.getAllLocation().get(0);
         Bank bank = new Bank("New Bank", location.getLocationID());
         bankService.insertBank(bank);
+        List<Bank> banks = bankService.getAllBanks()
+                .stream().filter(bank1 -> bank1.getIDLocation()==location.getLocationID())
+                .collect(Collectors.toList());
+        Assert.assertEquals(banks.size(),1);
     }
 
-    @Test(priority = 6)
-    public void updateNameBankTestCase() throws InfoException {
+    @Test(priority = 6, description = "update bank name in DB")
+    public void updateNameBankTestCase(){
         Bank bank = bankService.getAllBanks().get(1);
         bank.setName("Private Bank");
         bankService.updateBank(bank);
         Assert.assertEquals(bank, bankService.getBankByName(bank.getName()));
     }
 
-    @Test(priority = 7)
-    public void updateLocationBankTestCase() throws InfoException {
+    @Test(priority = 7, description = "change bank location in DB")
+    public void updateLocationBankTestCase(){
         Bank bank = bankService.getAllBanks().get(1);
         bank.setIDLocation(locationService.getAllLocation().get(4).getLocationID());
         bankService.updateBank(bank);
         Assert.assertEquals(bank, bankService.getBankByName(bank.getName()));
     }
 
-    @Test(priority = 8,
-            expectedExceptions = {InfoException.class},
-            expectedExceptionsMessageRegExp = "This bank is absent")
-    public void deleteBankTestCase() throws InfoException {
+    @Test(priority = 8, description = "delete bank from DB")
+    public void deleteBankTestCase(){
         Bank bank = bankService.getAllBanks().get(2);
         bankService.deleteBank(bank);
         bank = bankService.getBankByName(bank.getName());
-    }
-
-    @Test(priority = 9,
-            expectedExceptions = {InfoException.class},
-            expectedExceptionsMessageRegExp = "This bank is absent")
-    public void deleteNotExistBankTestCase() throws InfoException {
-        Bank bank = new Bank("Bank", 123);
-        bankService.deleteBank(bank);
+        Assert.assertNull(bank);
     }
 }
